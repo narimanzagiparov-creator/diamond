@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEKKEL JEWELLERY — Бриллиантовые украшения</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --deep-violet: #2D1B4E;
+  --royal-purple: #6B3FA0;
+  --soft-lavender: #C9A8E8;
+  --light-lilac: #EEE0FA;
+  --gold: #C8A84B;
+  --gold-light: #E8D08A;
+  --white: #FDFAFF;
+  --text-dark: #1A0F2E;
+  --text-mid: #4A3570;
+  --glass: rgba(255,255,255,0.07);
+  --glass-border: rgba(200,168,75,0.3);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: var(--deep-violet);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* ─── PARTICLES CANVAS ─── */
+#particles-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+  opacity: 0.4;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(45,27,78,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--soft-lavender);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+.nav-actions { display: flex; align-items: center; gap: 16px; }
+
+.cart-btn {
+  position: relative;
+  background: none; border: 1px solid var(--glass-border);
+  color: var(--gold); padding: 8px 20px;
+  border-radius: 2px; cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem; letter-spacing: 0.15em;
+  text-transform: uppercase; transition: all 0.3s;
+}
+.cart-btn:hover { background: var(--gold); color: var(--deep-violet); }
+.cart-count {
+  position: absolute; top: -8px; right: -8px;
+  background: var(--royal-purple); color: white;
+  border-radius: 50%; width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; font-weight: 600;
+}
+
+/* ─── HERO ─── */
+.hero {
+  position: relative; height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 60% 40%, #5A2A8A 0%, #2D1B4E 50%, #1A0A30 100%);
+}
+
+.hero-ring-3d {
+  position: absolute; right: 10%; top: 50%;
+  transform: translateY(-50%);
+  width: 500px; height: 500px;
+}
+
+.ring-scene {
+  width: 100%; height: 100%;
+  animation: float3d 6s ease-in-out infinite;
+}
+
+@keyframes float3d {
+  0%,100% { transform: translateY(0) rotateY(0deg) rotateX(5deg); }
+  25% { transform: translateY(-20px) rotateY(15deg) rotateX(8deg); }
+  50% { transform: translateY(-10px) rotateY(5deg) rotateX(3deg); }
+  75% { transform: translateY(-25px) rotateY(-10deg) rotateX(10deg); }
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  max-width: 600px; padding: 0 60px;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: ''; display: block;
+  width: 40px; height: 1px; background: var(--gold);
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--white);
+  margin-bottom: 24px;
+}
+.hero-title em {
+  font-style: italic;
+  color: var(--soft-lavender);
+}
+
+.hero-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--soft-lavender);
+  line-height: 1.8;
+  margin-bottom: 40px;
+  opacity: 0.85;
+}
+
+.hero-ctas {
+  display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--deep-violet);
+  padding: 14px 36px; border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px;
+  transition: all 0.3s; text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(200,168,75,0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--soft-lavender);
+  padding: 14px 36px;
+  border: 1px solid rgba(201,168,232,0.4);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px;
+  transition: all 0.3s; text-decoration: none;
+  display: inline-block;
+}
+.btn-outline:hover {
+  border-color: var(--soft-lavender);
+  background: rgba(201,168,232,0.1);
+  transform: translateY(-2px);
+}
+
+.hero-badges {
+  position: absolute; bottom: 40px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; gap: 40px;
+  z-index: 2;
+}
+.badge {
+  text-align: center;
+  animation: fadeInUp 1s ease both;
+}
+.badge:nth-child(2) { animation-delay: 0.15s; }
+.badge:nth-child(3) { animation-delay: 0.3s; }
+.badge:nth-child(4) { animation-delay: 0.45s; }
+
+.badge-icon {
+  font-size: 1.4rem; margin-bottom: 6px;
+}
+.badge-text {
+  font-size: 0.62rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--soft-lavender);
+}
+
+@keyframes fadeInUp {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ─── SECTION COMMON ─── */
+section { position: relative; z-index: 1; }
+
+.section-header {
+  text-align: center;
+  padding: 80px 60px 50px;
+}
+.section-eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 14px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  font-weight: 300; color: var(--white);
+}
+.section-title em { font-style: italic; color: var(--soft-lavender); }
+.divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  margin: 20px auto 0;
+}
+
+/* ─── FILTER TABS ─── */
+.filter-tabs {
+  display: flex; justify-content: center; gap: 8px;
+  padding: 0 60px 40px; flex-wrap: wrap;
+}
+.tab-btn {
+  background: none;
+  border: 1px solid rgba(201,168,232,0.25);
+  color: var(--soft-lavender);
+  padding: 9px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem; letter-spacing: 0.15em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.3s;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: var(--royal-purple);
+  border-color: var(--royal-purple);
+  color: white;
+}
+
+/* ─── CATALOG GRID ─── */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px; padding: 0 60px 80px;
+}
+
+.product-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.4s;
+  cursor: pointer;
+  animation: fadeInUp 0.6s ease both;
+}
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(107,63,160,0.4);
+  border-color: var(--gold);
+}
+
+.product-img-wrap {
+  position: relative; overflow: hidden;
+  aspect-ratio: 1/1; background: #1a0f2e;
+}
+
+.product-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.5s;
+}
+.product-card:hover .product-img-wrap img {
+  transform: scale(1.06);
+}
+
+/* Zoom overlay */
+.zoom-overlay {
+  position: absolute; inset: 0;
+  background: rgba(45,27,78,0.7);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+}
+.product-card:hover .zoom-overlay { opacity: 1; }
+.zoom-icon {
+  color: white; font-size: 1.8rem;
+  background: rgba(255,255,255,0.15);
+  width: 50px; height: 50px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+.product-status {
+  position: absolute; top: 14px; left: 14px;
+  font-size: 0.6rem; letter-spacing: 0.15em;
+  text-transform: uppercase; padding: 5px 12px;
+  border-radius: 2px; font-weight: 600;
+}
+.in-stock { background: rgba(76,175,80,0.85); color: white; }
+.on-order { background: rgba(200,168,75,0.85); color: #1a0f2e; }
+.order-time {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 0.58rem; letter-spacing: 0.1em;
+  background: rgba(45,27,78,0.8);
+  color: var(--soft-lavender);
+  padding: 4px 10px; border-radius: 2px;
+  border: 1px solid rgba(201,168,232,0.3);
+}
+
+.product-info { padding: 20px; }
+.product-category {
+  font-size: 0.6rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 6px;
+}
+.product-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; font-weight: 400;
+  color: var(--white); margin-bottom: 6px;
+}
+.product-specs {
+  font-size: 0.65rem; color: var(--soft-lavender);
+  line-height: 1.6; margin-bottom: 14px;
+  opacity: 0.8;
+}
+.product-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; font-weight: 500;
+  color: var(--gold); margin-bottom: 16px;
+}
+.product-price span {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem; color: var(--soft-lavender);
+  display: block; margin-top: 2px;
+}
+
+.product-actions {
+  display: flex; gap: 8px;
+}
+.add-cart-btn {
+  flex: 1;
+  background: linear-gradient(135deg, var(--royal-purple), #8B52CC);
+  color: white; border: none;
+  padding: 10px 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.65rem; letter-spacing: 0.15em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.3s;
+}
+.add-cart-btn:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--deep-violet);
+  transform: scale(1.02);
+}
+.view-btn {
+  background: none;
+  border: 1px solid var(--glass-border);
+  color: var(--gold); padding: 10px 14px;
+  cursor: pointer; border-radius: 2px;
+  font-size: 0.75rem; transition: all 0.3s;
+}
+.view-btn:hover { background: rgba(200,168,75,0.1); }
+
+/* ─── PAYMENT SECTION ─── */
+.payment-section {
+  padding: 80px 60px;
+  background: linear-gradient(180deg, transparent, rgba(107,63,160,0.1), transparent);
+}
+.payment-title {
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem; font-weight: 300;
+  color: var(--white); margin-bottom: 50px;
+}
+.payment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+.pay-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 32px 28px; border-radius: 4px;
+  text-align: center; transition: all 0.4s;
+}
+.pay-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(200,168,75,0.15);
+}
+.pay-icon { font-size: 2.2rem; margin-bottom: 16px; }
+.pay-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; color: var(--gold);
+  margin-bottom: 10px;
+}
+.pay-desc {
+  font-size: 0.7rem; color: var(--soft-lavender);
+  line-height: 1.7; opacity: 0.85;
+}
+
+/* ─── GUIDE SECTION ─── */
+.guide-section {
+  padding: 80px 60px;
+}
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px; margin-top: 20px;
+}
+.guide-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 32px; border-radius: 4px;
+  transition: all 0.4s;
+}
+.guide-card:hover {
+  border-color: var(--soft-lavender);
+  transform: translateY(-4px);
+}
+.guide-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem; font-weight: 300;
+  color: rgba(201,168,232,0.2);
+  line-height: 1; margin-bottom: 16px;
+}
+.guide-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem; color: var(--gold);
+  margin-bottom: 12px;
+}
+.guide-text {
+  font-size: 0.72rem; color: var(--soft-lavender);
+  line-height: 1.8; opacity: 0.85;
+}
+
+/* ─── DIAMONDS COMPARE ─── */
+.compare-section {
+  padding: 80px 60px;
+  background: rgba(107,63,160,0.07);
+}
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px; max-width: 900px; margin: 40px auto 0;
+}
+.compare-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 36px; border-radius: 4px;
+  text-align: center;
+}
+.compare-card.natural { border-top: 3px solid var(--gold); }
+.compare-card.lab { border-top: 3px solid var(--royal-purple); }
+.compare-icon { font-size: 2.5rem; margin-bottom: 16px; }
+.compare-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; margin-bottom: 8px;
+}
+.compare-card.natural .compare-name { color: var(--gold); }
+.compare-card.lab .compare-name { color: var(--soft-lavender); }
+.compare-list {
+  list-style: none;
+  text-align: left; margin-top: 20px;
+}
+.compare-list li {
+  font-size: 0.72rem; color: var(--soft-lavender);
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+  line-height: 1.6; display: flex; gap: 10px;
+}
+.compare-list li::before { content: '◆'; color: var(--gold); font-size: 0.5rem; margin-top: 4px; flex-shrink: 0; }
+
+/* ─── CONTACT / FOOTER ─── */
+.contact-section {
+  padding: 80px 60px;
+  text-align: center;
+}
+.contact-links {
+  display: flex; justify-content: center;
+  gap: 24px; margin-top: 40px; flex-wrap: wrap;
+}
+.contact-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  padding: 28px 36px; border-radius: 4px;
+  text-decoration: none; color: inherit;
+  transition: all 0.3s; min-width: 200px;
+}
+.contact-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(200,168,75,0.15);
+}
+.contact-icon { font-size: 1.8rem; margin-bottom: 10px; }
+.contact-label {
+  font-size: 0.62rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 6px;
+}
+.contact-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem; color: var(--white);
+}
+
+footer {
+  border-top: 1px solid var(--glass-border);
+  padding: 30px 60px;
+  display: flex; justify-content: space-between;
+  align-items: center; font-size: 0.65rem;
+  color: rgba(201,168,232,0.5);
+  letter-spacing: 0.1em;
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(26,15,46,0.92);
+  backdrop-filter: blur(16px);
+  z-index: 2000;
+  display: none; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: linear-gradient(135deg, #2D1B4E, #1E1235);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  max-width: 900px; width: 100%;
+  max-height: 90vh; overflow-y: auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative;
+  animation: modalIn 0.4s ease;
+}
+@keyframes modalIn {
+  from { opacity:0; transform:scale(0.93) translateY(20px); }
+  to { opacity:1; transform:scale(1) translateY(0); }
+}
+.modal-close {
+  position: absolute; top: 16px; right: 16px;
+  background: none; border: 1px solid var(--glass-border);
+  color: var(--soft-lavender); width: 34px; height: 34px;
+  border-radius: 50%; cursor: pointer;
+  font-size: 1rem; display: flex;
+  align-items: center; justify-content: center;
+  transition: all 0.3s; z-index: 10;
+}
+.modal-close:hover { background: var(--royal-purple); }
+
+.modal-img-wrap {
+  position: relative; overflow: hidden;
+  border-radius: 6px 0 0 6px;
+}
+.modal-img-wrap img {
+  width: 100%; height: 100%; object-fit: cover;
+  cursor: zoom-in; transition: transform 0.3s;
+}
+.modal-img-wrap img.zoomed {
+  transform: scale(1.8);
+  cursor: zoom-out;
+}
+.zoom-hint {
+  position: absolute; bottom: 14px; left: 50%;
+  transform: translateX(-50%);
+  background: rgba(45,27,78,0.8);
+  color: var(--soft-lavender);
+  font-size: 0.6rem; padding: 5px 12px;
+  border-radius: 20px; letter-spacing: 0.1em;
+  pointer-events: none;
+}
+.modal-details { padding: 40px; }
+.modal-category {
+  font-size: 0.6rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 10px;
+}
+.modal-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem; font-weight: 300;
+  color: var(--white); margin-bottom: 14px;
+}
+.modal-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem; color: var(--gold);
+  margin-bottom: 20px;
+}
+.modal-specs {
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 16px 0; margin-bottom: 20px;
+}
+.spec-row {
+  display: flex; justify-content: space-between;
+  padding: 6px 0; font-size: 0.7rem;
+  color: var(--soft-lavender);
+}
+.spec-row strong { color: var(--white); }
+
+.modal-status {
+  display: inline-block; font-size: 0.62rem;
+  letter-spacing: 0.15em; text-transform: uppercase;
+  padding: 5px 14px; border-radius: 2px;
+  margin-bottom: 20px;
+}
+.modal-add-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--royal-purple), #8B52CC);
+  color: white; border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; letter-spacing: 0.2em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.3s;
+  margin-bottom: 10px;
+}
+.modal-add-btn:hover {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--deep-violet);
+}
+.modal-wa-btn {
+  width: 100%; padding: 12px;
+  background: transparent;
+  color: #25D366; border: 1px solid #25D366;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.68rem; letter-spacing: 0.15em;
+  text-transform: uppercase; cursor: pointer;
+  border-radius: 2px; transition: all 0.3s;
+}
+.modal-wa-btn:hover { background: rgba(37,211,102,0.1); }
+
+/* ─── CART SIDEBAR ─── */
+.cart-sidebar {
+  position: fixed; top: 0; right: -420px;
+  width: 420px; height: 100%;
+  background: linear-gradient(180deg, #2D1B4E, #1E1235);
+  border-left: 1px solid var(--glass-border);
+  z-index: 3000; transition: right 0.4s ease;
+  display: flex; flex-direction: column;
+  backdrop-filter: blur(20px);
+}
+.cart-sidebar.open { right: 0; }
+.cart-header {
+  padding: 24px 28px;
+  border-bottom: 1px solid var(--glass-border);
+  display: flex; justify-content: space-between;
+  align-items: center;
+}
+.cart-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem; color: var(--gold);
+}
+.cart-close {
+  background: none; border: 1px solid var(--glass-border);
+  color: var(--soft-lavender); width: 32px; height: 32px;
+  border-radius: 50%; cursor: pointer; font-size: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.3s;
+}
+.cart-close:hover { background: var(--royal-purple); }
+.cart-items { flex: 1; overflow-y: auto; padding: 20px 28px; }
+.cart-empty {
+  text-align: center; padding: 60px 0;
+  color: var(--soft-lavender); opacity: 0.5;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+}
+.cart-item {
+  display: flex; gap: 14px;
+  padding: 14px 0; border-bottom: 1px solid var(--glass-border);
+}
+.cart-item-img {
+  width: 64px; height: 64px;
+  border-radius: 2px; object-fit: cover;
+  flex-shrink: 0;
+}
+.cart-item-info { flex: 1; }
+.cart-item-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem; color: var(--white); margin-bottom: 4px;
+}
+.cart-item-price {
+  font-size: 0.75rem; color: var(--gold);
+}
+.cart-item-remove {
+  background: none; border: none;
+  color: rgba(201,168,232,0.4);
+  cursor: pointer; font-size: 1rem;
+  transition: color 0.2s;
+}
+.cart-item-remove:hover { color: #ff6b6b; }
+.cart-footer {
+  padding: 20px 28px;
+  border-top: 1px solid var(--glass-border);
+}
+.cart-total {
+  display: flex; justify-content: space-between;
+  margin-bottom: 16px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem; color: var(--white);
+}
+.cart-total span { color: var(--gold); }
+.checkout-btn {
+  width: 100%; padding: 14px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  color: var(--deep-violet); border: none;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  cursor: pointer; border-radius: 2px; transition: all 0.3s;
+}
+.checkout-btn:hover { transform: scale(1.02); box-shadow: 0 6px 20px rgba(200,168,75,0.4); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--royal-purple); border-radius: 2px; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hero-content { padding: 0 20px; }
+  .hero-ring-3d { display: none; }
+  .catalog-grid { padding: 0 20px 60px; grid-template-columns: 1fr 1fr; }
+  .section-header { padding: 60px 20px 40px; }
+  .filter-tabs { padding: 0 20px 30px; }
+  .payment-section, .guide-section, .compare-section, .contact-section { padding: 60px 20px; }
+  .compare-grid { grid-template-columns: 1fr; }
+  .modal { grid-template-columns: 1fr; }
+  .modal-img-wrap { border-radius: 6px 6px 0 0; min-height: 260px; }
+  .cart-sidebar { width: 100%; right: -100%; }
+  footer { padding: 24px 20px; justify-content: center; text-align: center; }
+  .hero-badges { gap: 16px; bottom: 20px; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles-canvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">GEKKEL JEWELLERY</a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Каталог</a></li>
+    <li><a href="#payment">Оплата</a></li>
+    <li><a href="#guide">Гид покупателя</a></li>
+    <li><a href="#compare">Бриллианты</a></li>
+    <li><a href="#contact">Контакты</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="cart-btn" onclick="toggleCart()">
+      🛍 Корзина
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Ювелирный дом — с 2020</div>
+    <h1 class="hero-title">
+      Бриллианты,<br>
+      достойные <em>вечности</em>
+    </h1>
+    <p class="hero-subtitle">
+      Природные и лабораторные бриллианты высшего качества.<br>
+      Сертификаты GIA & IGI. Изготовление на заказ.<br>
+      Кольца, подвески и украшения, которые говорят сами за себя.
+    </p>
+    <div class="hero-ctas">
+      <a href="#catalog" class="btn-primary">Смотреть каталог</a>
+      <a href="https://wa.me/77019475000" target="_blank" class="btn-outline">Написать в WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- 3D RING SVG -->
+  <div class="hero-ring-3d">
+    <svg class="ring-scene" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ringGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#C8A84B" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#6B3FA0" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="ringGrad" cx="30%" cy="30%">
+          <stop offset="0%" stop-color="#E8D08A"/>
+          <stop offset="40%" stop-color="#C8A84B"/>
+          <stop offset="100%" stop-color="#8B6B2A"/>
+        </radialGradient>
+        <radialGradient id="diamondGrad" cx="40%" cy="30%">
+          <stop offset="0%" stop-color="#FFFFFF"/>
+          <stop offset="30%" stop-color="#EEE0FA"/>
+          <stop offset="70%" stop-color="#C9A8E8"/>
+          <stop offset="100%" stop-color="#6B3FA0"/>
+        </radialGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="sparkle">
+          <feGaussianBlur stdDeviation="2" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <!-- Glow base -->
+      <ellipse cx="250" cy="320" rx="160" ry="40" fill="url(#ringGlow)" opacity="0.6"/>
+
+      <!-- Ring band bottom -->
+      <ellipse cx="250" cy="295" rx="110" ry="30" fill="#8B6B2A" opacity="0.7"/>
+
+      <!-- Ring band body -->
+      <rect x="140" y="180" width="220" height="115" rx="8" fill="url(#ringGrad)"/>
+
+      <!-- Ring inner shadow -->
+      <ellipse cx="250" cy="180" rx="100" ry="26" fill="#5A3A10" opacity="0.5"/>
+
+      <!-- Ring band top -->
+      <ellipse cx="250" cy="180" rx="110" ry="30" fill="url(#ringGrad)" filter="url(#glow)"/>
+
+      <!-- Inner hole -->
+      <ellipse cx="250" cy="180" rx="68" ry="18" fill="#1A0A30"/>
+
+      <!-- Diamond setting -->
+      <polygon points="250,60 220,120 280,120" fill="#C8A84B"/>
+      <polygon points="250,60 220,120 250,100 280,120" fill="#E8D08A"/>
+
+      <!-- Main diamond -->
+      <polygon points="250,72 228,105 250,130 272,105" fill="url(#diamondGrad)" filter="url(#glow)"/>
+      <polygon points="250,72 228,105 250,90" fill="rgba(255,255,255,0.7)"/>
+      <polygon points="250,72 272,105 250,90" fill="rgba(200,168,200,0.5)"/>
+      <polygon points="228,105 250,130 250,110" fill="rgba(150,100,200,0.6)"/>
+      <polygon points="272,105 250,130 250,110" fill="rgba(100,60,160,0.7)"/>
+
+      <!-- Diamond sparkles -->
+      <g filter="url(#sparkle)">
+        <line x1="250" y1="62" x2="250" y2="50" stroke="white" stroke-width="1.5" opacity="0.9"/>
+        <line x1="258" y1="65" x2="265" y2="55" stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <line x1="242" y1="65" x2="235" y2="55" stroke="white" stroke-width="1.5" opacity="0.8"/>
+        <circle cx="250" cy="48" r="3" fill="white" opacity="0.9"/>
+        <circle cx="266" cy="53" r="2" fill="white" opacity="0.7"/>
+        <circle cx="234" cy="53" r="2" fill="white" opacity="0.7"/>
+      </g>
+
+      <!-- Side diamonds -->
+      <polygon points="195,108 178,125 195,140 212,125" fill="url(#diamondGrad)" opacity="0.85" filter="url(#sparkle)"/>
+      <polygon points="305,108 288,125 305,140 322,125" fill="url(#diamondGrad)" opacity="0.85" filter="url(#sparkle)"/>
+
+      <!-- Floating sparkles -->
+      <circle cx="160" cy="130" r="2.5" fill="white" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;0.1;0.8" dur="2.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="340" cy="140" r="2" fill="#C9A8E8" opacity="0.9">
+        <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1.8s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="200" cy="90" r="1.5" fill="white" opacity="0.7">
+        <animate attributeName="opacity" values="0.7;0.1;0.7" dur="2.5s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="300" cy="85" r="1.5" fill="#E8D08A" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+  </div>
+
+  <div class="hero-badges">
+    <div class="badge">
+      <div class="badge-icon">💎</div>
+      <div class="badge-text">Природные</div>
+    </div>
+    <div class="badge">
+      <div class="badge-icon">🔬</div>
+      <div class="badge-text">Лабораторные</div>
+    </div>
+    <div class="badge">
+      <div class="badge-icon">📜</div>
+      <div class="badge-text">GIA & IGI</div>
+    </div>
+    <div class="badge">
+      <div class="badge-icon">✨</div>
+      <div class="badge-text">На заказ</div>
+    </div>
+  </div>
+</section>
+
+<!-- CATALOG -->
+<section id="catalog">
+  <div class="section-header">
+    <div class="section-eyebrow">Наши украшения</div>
+    <h2 class="section-title">Каталог <em>коллекции</em></h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="filter-tabs">
+    <button class="tab-btn active" onclick="filterProducts('all', this)">Все</button>
+    <button class="tab-btn" onclick="filterProducts('ring', this)">Кольца</button>
+    <button class="tab-btn" onclick="filterProducts('pendant', this)">Подвески</button>
+    <button class="tab-btn" onclick="filterProducts('available', this)">В наличии</button>
+    <button class="tab-btn" onclick="filterProducts('order', this)">На заказ</button>
+  </div>
+
+  <div class="catalog-grid" id="catalogGrid"></div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+  <div class="payment-section">
+    <div class="section-eyebrow" style="text-align:center;font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;">Удобная оплата</div>
+    <h2 class="payment-title">Способы <em style="font-style:italic;color:var(--soft-lavender);">оплаты</em></h2>
+    <div class="payment-cards">
+      <div class="pay-card">
+        <div class="pay-icon">💳</div>
+        <div class="pay-name">Картой онлайн</div>
+        <div class="pay-desc">Visa, Mastercard, UnionPay. Безопасная оплата через защищённый шлюз. Моментальное подтверждение заказа.</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">📅</div>
+        <div class="pay-name">Рассрочка 0%</div>
+        <div class="pay-desc">До 12 месяцев без переплат. Минимальный взнос — 30%. Быстрое одобрение за 5 минут. Выгодно для дорогих изделий.</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">📱</div>
+        <div class="pay-name">Kaspi / Halyk</div>
+        <div class="pay-desc">Оплата через популярные казахстанские банковские приложения. Быстро, привычно и без лишних шагов.</div>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">🤝</div>
+        <div class="pay-name">Наличными</div>
+        <div class="pay-desc">Оплата при встрече или самовывозе. Предоплата 50% для украшений на заказ. Полный расчёт при получении.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GUIDE -->
+<section id="guide">
+  <div class="guide-section">
+    <div class="section-header" style="padding-top:0">
+      <div class="section-eyebrow">Лайфхаки</div>
+      <h2 class="section-title">Как выбрать <em>украшение</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="guide-grid">
+      <div class="guide-card">
+        <div class="guide-num">01</div>
+        <div class="guide-title">Правило 4C</div>
+        <div class="guide-text">Бриллиант оценивается по четырём критериям: огранка (Cut), цвет (Color), чистота (Clarity) и вес (Carat). Огранка — самый важный параметр: именно она определяет блеск. Мы рекомендуем «Excellent» или «Very Good».</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">02</div>
+        <div class="guide-title">Размер кольца</div>
+        <div class="guide-text">Идеальный способ — измерить окружность пальца ниткой или бумагой и перевести в миллиметры. Лучше делать это вечером: пальцы немного увеличиваются. Мы бесплатно подгоняем размер при необходимости.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">03</div>
+        <div class="guide-title">Выбор металла</div>
+        <div class="guide-text">Белое золото 750 пробы — нейтральный фон, усиливает белизну бриллианта. Жёлтое золото — классика и теплота. Розовое золото — романтичность и трендовость. Платина — максимум долговечности.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">04</div>
+        <div class="guide-title">Сертификат — обязательно</div>
+        <div class="guide-text">Покупайте только с сертификатом GIA или IGI. Это независимая экспертиза, которая фиксирует все параметры камня. Любой камень из нашего каталога сертифицирован — без исключений.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">05</div>
+        <div class="guide-title">Каст и крепление</div>
+        <div class="guide-text">Глухой каст защищает камень по периметру. Крапановый — максимально открывает бриллиант свету. Паве создаёт эффект сияющей дорожки. Мы помогаем выбрать под образ жизни.</div>
+      </div>
+      <div class="guide-card">
+        <div class="guide-num">06</div>
+        <div class="guide-title">Бюджет и качество</div>
+        <div class="guide-text">Не гонитесь за максимальным весом в ущерб огранке. Бриллиант 0.7 кт с огранкой «Excellent» сияет ярче, чем 1 кт с «Good». Для помолвочных колец приоритет — огранка и чистота.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE -->
+<section id="compare">
+  <div class="compare-section">
+    <div class="section-header" style="padding-top:0">
+      <div class="section-eyebrow">Разбираемся</div>
+      <h2 class="section-title">Природный vs <em>Лабораторный</em></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="compare-grid">
+      <div class="compare-card natural">
+        <div class="compare-icon">🌍</div>
+        <div class="compare-name">Природный бриллиант</div>
+        <ul class="compare-list">
+          <li>Формировался миллиарды лет в недрах Земли при давлении 50 000 атм</li>
+          <li>Уникальная история и редкость — каждый камень неповторим</li>
+          <li>Сохраняет и увеличивает ценность со временем</li>
+          <li>Идеален как семейная реликвия и инвестиция</li>
+          <li>Цена выше, но и ценность на вторичном рынке значительно выше</li>
+          <li>Сертификаты GIA — золотой стандарт для природных камней</li>
+        </ul>
+      </div>
+      <div class="compare-card lab">
+        <div class="compare-icon">🔬</div>
+        <div class="compare-name">Лабораторный бриллиант</div>
+        <ul class="compare-list">
+          <li>Выращивается в реакторе за 6–10 недель при идентичных условиях</li>
+          <li>Химически, физически и оптически идентичен природному</li>
+          <li>На 40–60% дешевле при том же визуальном качестве</li>
+          <li>Экологически чистое производство без добычи</li>
+          <li>Позволяет выбрать больший размер за тот же бюджет</li>
+          <li>Сертификаты IGI — признанный стандарт для lab-grown</li>
+        </ul>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:30px;font-size:0.72rem;color:var(--soft-lavender);opacity:0.7;letter-spacing:0.05em;">
+      Оба вида одинаково красивы. Выбор зависит от ваших ценностей и бюджета. Мы поможем определиться — напишите нам.
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-section">
+    <div class="section-eyebrow">Связаться с нами</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:300;margin-top:14px;">
+      Мы на <em style="font-style:italic;color:var(--soft-lavender);">связи</em>
+    </h2>
+    <div class="divider"></div>
+    <p style="margin-top:24px;font-size:0.76rem;color:var(--soft-lavender);opacity:0.8;letter-spacing:0.05em;">
+      Консультируем бесплатно · Помогаем с выбором · Изготовление на заказ от 7 дней
+    </p>
+    <div class="contact-links">
+      <a href="tel:+77019475000" class="contact-card">
+        <div class="contact-icon">📞</div>
+        <div class="contact-label">Телефон</div>
+        <div class="contact-value">+7 701 947 5000</div>
+      </a>
+      <a href="https://wa.me/77019475000" target="_blank" class="contact-card">
+        <div class="contact-icon">💬</div>
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-value">+7 701 947 5000</div>
+      </a>
+      <a href="https://www.instagram.com/gekkel_diamond/" target="_blank" class="contact-card">
+        <div class="contact-icon">📸</div>
+        <div class="contact-label">Instagram</div>
+        <div class="contact-value">@gekkel_diamond</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2024 GEKKEL JEWELLERY. Все права защищены.</span>
+  <span>Природные и лабораторные бриллианты · GIA & IGI</span>
+  <span>+7 701 947 5000</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-img-wrap" id="modalImgWrap">
+      <img id="modalImg" src="" alt="" onclick="toggleZoom(this)"/>
+      <div class="zoom-hint">Нажмите для увеличения</div>
+    </div>
+    <div class="modal-details">
+      <div class="modal-category" id="modalCategory"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-price" id="modalPrice"></div>
+      <div class="modal-status" id="modalStatus"></div>
+      <div class="modal-specs" id="modalSpecs"></div>
+      <button class="modal-add-btn" id="modalAddBtn" onclick="addFromModal()">Добавить в корзину</button>
+      <a href="https://wa.me/77019475000" target="_blank">
+        <button class="modal-wa-btn">💬 Спросить в WhatsApp</button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <div class="cart-title">Корзина</div>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty">Корзина пуста</div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">Итого: <span id="cartTotal">0 ₸</span></div>
+    <button class="checkout-btn" onclick="checkout()">Оформить заказ</button>
+  </div>
+</div>
+
+<script>
+// ─── PARTICLES ───
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+for (let i = 0; i < 80; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 1.5 + 0.3,
+    dx: (Math.random() - 0.5) * 0.3,
+    dy: (Math.random() - 0.5) * 0.3,
+    opacity: Math.random() * 0.6 + 0.1,
+    color: Math.random() > 0.5 ? '#C8A84B' : '#C9A8E8'
+  });
+}
+
+function animParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color;
+    ctx.globalAlpha = p.opacity;
+    ctx.fill();
+    p.x += p.dx; p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+  ctx.globalAlpha = 1;
+  requestAnimationFrame(animParticles);
+}
+animParticles();
+
+// ─── PRODUCT DATA ───
+const products = [
+  {
+    id: 1, category: 'ring', name: 'Solitaire Brilliance',
+    price: 1250000, currency: '₸',
+    status: 'available',
+    orderDays: null,
+    img: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80',
+    specs: { metal: 'Белое золото 750', diamond: '0.80 кт', cut: 'Excellent', color: 'F', clarity: 'VS1', cert: 'GIA' },
+    desc: 'Классическое помолвочное кольцо с одиночным бриллиантом в крапановой оправе. Максимум света и сияния.'
+  },
+  {
+    id: 2, category: 'ring', name: 'Violet Halo',
+    price: 890000, currency: '₸',
+    status: 'order',
+    orderDays: '14–21 день',
+    img: 'https://images.unsplash.com/photo-1602751584552-8ba73aad10e1?w=600&q=80',
+    specs: { metal: 'Розовое золото 750', diamond: '0.50 кт + 0.30 кт halo', cut: 'Very Good', color: 'G', clarity: 'VS2', cert: 'GIA' },
+    desc: 'Нежное кольцо с центральным бриллиантом в обрамлении россыпи меньших камней — эффект ореола.'
+  },
+  {
+    id: 3, category: 'pendant', name: 'Étoile Pendant',
+    price: 420000, currency: '₸',
+    status: 'available',
+    orderDays: null,
+    img: 'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?w=600&q=80',
+    specs: { metal: 'Белое золото 585', diamond: '0.25 кт', cut: 'Excellent', color: 'E', clarity: 'VVS2', cert: 'IGI' },
+    desc: 'Элегантная подвеска «звезда» с лабораторным бриллиантом высшего качества. Сертификат IGI.'
+  },
+  {
+    id: 4, category: 'ring', name: 'Eternity Band',
+    price: 1680000, currency: '₸',
+    status: 'order',
+    orderDays: '21–28 дней',
+    img: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80',
+    specs: { metal: 'Платина 950', diamond: '1.20 кт total', cut: 'Excellent', color: 'D–E', clarity: 'VVS1', cert: 'GIA' },
+    desc: 'Кольцо вечности с бриллиантами по всему обхвату в платиновой оправе. Символ бесконечной любви.'
+  },
+  {
+    id: 5, category: 'pendant', name: 'Pear Drop',
+    price: 560000, currency: '₸',
+    status: 'available',
+    orderDays: null,
+    img: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600&q=80',
+    specs: { metal: 'Жёлтое золото 750', diamond: '0.40 кт груша', cut: 'Excellent', color: 'F', clarity: 'SI1', cert: 'IGI' },
+    desc: 'Подвеска с бриллиантом огранки «груша» — форма, которая визуально удлиняет шею. Лабораторный бриллиант.'
+  },
+  {
+    id: 6, category: 'ring', name: 'Three Stone',
+    price: 2100000, currency: '₸',
+    status: 'order',
+    orderDays: '14–21 день',
+    img: 'https://images.unsplash.com/photo-1600721391776-b5cd0e0048f9?w=600&q=80',
+    specs: { metal: 'Белое золото 750', diamond: '1.50 кт + 0.60 кт (2)', cut: 'Excellent', color: 'E', clarity: 'VS1', cert: 'GIA' },
+    desc: 'Трёхкаменное кольцо символизирует прошлое, настоящее и будущее. Природные бриллианты, сертификаты GIA.'
+  },
+];
+
+let cart = [];
+let currentProduct = null;
+
+// ─── RENDER CATALOG ───
+function formatPrice(p) {
+  return p.toLocaleString('ru-RU') + ' ' + p.currency || '₸';
+}
+
+function renderProducts(filter = 'all') {
+  const grid = document.getElementById('catalogGrid');
+  grid.innerHTML = '';
+  const filtered = products.filter(p => {
+    if (filter === 'all') return true;
+    if (filter === 'ring') return p.category === 'ring';
+    if (filter === 'pendant') return p.category === 'pendant';
+    if (filter === 'available') return p.status === 'available';
+    if (filter === 'order') return p.status === 'order';
+    return true;
+  });
+  filtered.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.style.animationDelay = (i * 0.08) + 's';
+    card.dataset.category = p.category;
+    const statusLabel = p.status === 'available' ? '<span class="product-status in-stock">В наличии</span>' : '<span class="product-status on-order">На заказ</span>';
+    const orderTime = p.orderDays ? `<span class="order-time">⏱ ${p.orderDays}</span>` : '';
+    card.innerHTML = `
+      <div class="product-img-wrap">
+        <img src="${p.img}" alt="${p.name}" loading="lazy"/>
+        <div class="zoom-overlay"><div class="zoom-icon">🔍</div></div>
+        ${statusLabel}
+        ${orderTime}
+      </div>
+      <div class="product-info">
+        <div class="product-category">${p.category === 'ring' ? 'Кольцо' : 'Подвеска'}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-specs">${p.specs.diamond} · ${p.specs.metal} · ${p.specs.cert}</div>
+        <div class="product-price">${p.price.toLocaleString('ru-RU')} ₸<span>от ${Math.round(p.price/12).toLocaleString('ru-RU')} ₸/мес в рассрочку</span></div>
+        <div class="product-actions">
+          <button class="add-cart-btn" onclick="addToCart(${p.id}, event)">+ В корзину</button>
+          <button class="view-btn" onclick="openModal(${p.id})">🔍</button>
+        </div>
+      </div>
+    `;
+    card.querySelector('.product-img-wrap').addEventListener('click', () => openModal(p.id));
+    grid.appendChild(card);
+  });
+}
+
+function filterProducts(filter, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderProducts(filter);
+}
+
+// ─── CART ───
+function addToCart(id, e) {
+  if (e) e.stopPropagation();
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const existing = cart.find(x => x.id === id);
+  if (existing) { existing.qty++; } else { cart.push({...p, qty: 1}); }
+  updateCartUI();
+  showToast(`«${p.name}» добавлено в корзину`);
+}
+
+function addFromModal() {
+  if (!currentProduct) return;
+  addToCart(currentProduct.id, null);
+  closeModalDirect();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(x => x.id !== id);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const count = cart.reduce((s, x) => s + x.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+    footerEl.style.display = 'none';
+    return;
+  }
+  footerEl.style.display = 'block';
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <img class="cart-item-img" src="${item.img}" alt="${item.name}"/>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${(item.price * item.qty).toLocaleString('ru-RU')} ₸${item.qty > 1 ? ` × ${item.qty}` : ''}</div>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart(${item.id})">✕</button>
+    </div>
+  `).join('');
+  const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
+  document.getElementById('cartTotal').textContent = total.toLocaleString('ru-RU') + ' ₸';
+}
+
+function toggleCart() {
+  document.getElementById('cartSidebar').classList.toggle('open');
+}
+
+function checkout() {
+  const total = cart.reduce((s, x) => s + x.price * x.qty, 0);
+  const items = cart.map(x => `${x.name} (${x.qty} шт.)`).join(', ');
+  const msg = encodeURIComponent(`Здравствуйте! Хочу оформить заказ:\n${items}\nИтого: ${total.toLocaleString('ru-RU')} ₸`);
+  window.open(`https://wa.me/77019475000?text=${msg}`, '_blank');
+}
+
+// ─── MODAL ───
+function openModal(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentProduct = p;
+  document.getElementById('modalCategory').textContent = p.category === 'ring' ? 'Кольцо' : 'Подвеска';
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalPrice').textContent = p.price.toLocaleString('ru-RU') + ' ₸';
+  const statusEl = document.getElementById('modalStatus');
+  if (p.status === 'available') {
+    statusEl.textContent = '✓ В наличии'; statusEl.style.background = 'rgba(76,175,80,0.2)'; statusEl.style.color = '#81c784'; statusEl.style.border = '1px solid rgba(76,175,80,0.3)';
+  } else {
+    statusEl.textContent = `⏱ На заказ · ${p.orderDays}`; statusEl.style.background = 'rgba(200,168,75,0.15)'; statusEl.style.color = '#C8A84B'; statusEl.style.border = '1px solid rgba(200,168,75,0.3)';
+  }
+  const specsEl = document.getElementById('modalSpecs');
+  specsEl.innerHTML = Object.entries({
+    'Металл': p.specs.metal,
+    'Бриллиант': p.specs.diamond,
+    'Огранка': p.specs.cut,
+    'Цвет': p.specs.color,
+    'Чистота': p.specs.clarity,
+    'Сертификат': p.specs.cert
+  }).map(([k, v]) => `<div class="spec-row"><span>${k}</span><strong>${v}</strong></div>`).join('');
+  document.getElementById('modalImg').src = p.img;
+  document.getElementById('modalImg').alt = p.name;
+  document.getElementById('modalImg').classList.remove('zoomed');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) closeModalDirect();
+}
+function closeModalDirect() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentProduct = null;
+}
+
+function toggleZoom(img) {
+  img.classList.toggle('zoomed');
+}
+
+// ─── TOAST ───
+function showToast(msg) {
+  const t = document.createElement('div');
+  t.style.cssText = `position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#6B3FA0,#8B52CC);color:white;padding:12px 28px;border-radius:4px;font-size:0.72rem;letter-spacing:0.1em;z-index:9999;animation:fadeInUp 0.3s ease;box-shadow:0 8px 30px rgba(107,63,160,0.4);`;
+  t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2500);
+}
+
+// ─── SCROLL REVEAL ───
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.guide-card, .pay-card, .compare-card, .contact-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(30px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  observer.observe(el);
+});
+
+// ─── INIT ───
+renderProducts();
+</script>
+</body>
+</html>
